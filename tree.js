@@ -1,4 +1,4 @@
-var angle = PI/4;
+var angle = 0;
 var slider;
 function setup(){
     createCanvas(400,400);
@@ -18,8 +18,14 @@ function draw(){
 function branch(length){
     line(0,0,0,-length);
     translate(0,-length)
-    rotate(angle);
     if(length>4){
+        push();//used to save state
+        rotate(angle);
         branch(length * 0.67)
+        pop();//used to restore state
+        push();
+        rotate(-angle);
+        branch(length * 0.67);
+        pop();
     }
 }
